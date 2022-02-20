@@ -59,7 +59,7 @@ const LOOKUP_ID_PLUS          = "8";
  * If the Dockerfile was overriding the env, the user could not
  * disable Redis.
  */
-const DEFAULT_USE_REDIS = "0";
+const DEFAULT_USE_REDIS = "1";
 
 /**
  * Thrown when a database connection is already being setup and a new connection is requested

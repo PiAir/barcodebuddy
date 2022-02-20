@@ -1,13 +1,13 @@
 #!/bin/bash
 
 #Needs to be adjusted if Barcode Buddy runs on the same server
-SCRIPT_LOCATION="${SCRIPT_LOCATION:="/var/www/html/barcodebuddy/index.php"}"
+SCRIPT_LOCATION="/app/bbuddy/index.php"
 #Needs to be adjusted if Barcode Buddy runs on an external server
 SERVER_ADDRESS="${SERVER_ADDRESS:="https://your.bbuddy.url/api/"}"
 #Set to true if an external server is used
 USE_CURL="${USE_CURL:="false"}"
-WWW_USER="${WWW_USER:="www-data"}"
-IS_DOCKER="${IS_DOCKER:="false"}"
+WWW_USER="abc"
+IS_DOCKER=true
 #Enter API key if an external server is being used
 API_KEY="${API_KEY:="YOUR_API_KEY"}"
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IS_DOCKER=false
+IS_DOCKER=true
 if [[ $IS_DOCKER == false ]]; then
     echo "Do not run this script outside of docker!"
     exit 1

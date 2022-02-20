@@ -16,6 +16,11 @@
 
 
 require_once __DIR__ . "/../api.inc.php";
+require_once __DIR__ .'/ProviderJumbo/vendor/Net/URL2.php';
+require_once __DIR__ .'/ProviderJumbo/vendor/HTTP/Request2/Adapter.php';
+require_once __DIR__ .'/ProviderJumbo/vendor/HTTP/Request2/SocketWrapper.php';
+require_once __DIR__ .'/ProviderJumbo/vendor/HTTP/Request2/Response.php';
+require_once __DIR__ .'/ProviderJumbo/vendor/HTTP/Request2.php';
 
 class ProviderJumbo extends LookupProvider {
 
@@ -25,6 +30,35 @@ class ProviderJumbo extends LookupProvider {
         $this->providerName       = "Jumbo Group";
         $this->providerConfigKey  = "LOOKUP_USE_JUMBO";
         $this->ignoredResultCodes = array();
+    }
+    
+     /**
+     * @param string $url
+     * @param string $method
+     * @param array|null $formdata
+     * @param string|null $userAgent
+     * @param array|null $headers
+     * @param bool $decodeJson
+     * @param string|null $jsonData
+     * @return bool|mixed|string|null
+     */
+    protected function execute(string $url, string $method = METHOD_GET, array $formdata = null, string $userAgent = null, ?array $headers = null, bool $decodeJson = true, string $jsonData = null) {
+    
+        // We need to override the default execute function of LookupProvide to work around the CURL block by Jumbo
+        $request = new HTTP_Request2();
+        $request->setMethod(HTTP_Request2::METHOD_GET);
+        $request->setConfig(array(
+            'follow_redirects' => TRUE
+        ));
+        $request->setHeader($header);
+        $request->setBody($formdata);
+        try {
+            $result = $request->send();
+        } catch (HTTP_Request2_Exception $e) {
+            API::logError("Provider lookup error for " . $this->providerName . " - ".$e->getMessage(), false);
+            return null;
+        }
+        return $result;        
     }
 
     /**
@@ -37,7 +71,11 @@ class ProviderJumbo extends LookupProvider {
             return null;
 
         $url    = "https://mobileapi.jumbo.com/v12/search?q=" . $barcode;
-        $result = $this->execute($url);
+        $header = array(
+            'Host' => 'mobileapi.jumbo.com',
+            'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:81.0) Gecko/20100101 Firefox/81.0'
+        );
+        $result = $this->execute($url, null, null, null, $header);
         if (!isset($result["products"]) || !isset($result["products"]["data"]) || !isset($result["products"]["total"]) || $result["products"]["total"] == "O")
             return null;
 

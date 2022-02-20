@@ -13,6 +13,8 @@
  * @since      File available since Release 1.2
  */
 
+ 
+require_once __DIR__ . "/bbuddy-mqtt/bbuddy-mqtt.inc.php";
 
 /**
  * Example file for receiving events
@@ -28,7 +30,8 @@
  * @return void
  */
 function pluginEventReceiver_processEvent($eventType, $log): void {
-// intentionally left blank
+
+    bbuddy_mqtt_sendMQTT($eventType, $log);
 }
 
 

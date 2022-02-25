@@ -63,6 +63,7 @@ function checkForMissingConstants(): void {
         "CONFIG_PATH"                  => CONFIG_PATH,
         "AUTHDB_PATH"                  => AUTHDB_PATH,
         "CURL_TIMEOUT_S"               => 20,
+        "LOCALE"                       => 'en', 
         "CURL_ALLOW_INSECURE_SSL_CA"   => false,
         "CURL_ALLOW_INSECURE_SSL_HOST" => false,
         "IS_DOCKER"                    => false,
@@ -105,6 +106,7 @@ class GlobalConfig {
     public $TRUSTED_PROXIES = TRUSTED_PROXIES;
     public $SEARCH_ENGINE = SEARCH_ENGINE;
     public $BASEURL = BASEURL;
+    public $LOCALE  = LOCALE;
 
     function __construct() {
         $this->loadConfig();

@@ -118,26 +118,26 @@ $webUi->addHeader('<link rel="stylesheet" href="./incl/css/styleMain.css?v=' . B
 
 
 $link = (new MenuItemLink())
-    ->setText("Delete all")
+    ->setText(_("Delete all"))
     ->setLink('window.location.href=\'' . $CONFIG->getPhpSelfWithBaseUrl() . '?delete=req_actions\'');
 if (sizeof($barcodes['tare']) > 0) {
-    $webUi->addCard("Action required", getHtmlMainMenuReqActions($barcodes), $link);
+    $webUi->addCard(_("Action required"), getHtmlMainMenuReqActions($barcodes), $link);
 }
 
 $link = (new MenuItemLink())
-    ->setText("Delete all")
+    ->setText(_("Delete all"))
     ->setLink('window.location.href=\'' . $CONFIG->getPhpSelfWithBaseUrl() . '?delete=known\'');
-$webUi->addCard("New Barcodes", getHtmlMainMenuTableKnown($barcodes), $link);
+$webUi->addCard(_("New Barcodes"), getHtmlMainMenuTableKnown($barcodes), $link);
 
 $link = (new MenuItemLink())
-    ->setText("Delete all")
+    ->setText(_("Delete all"))
     ->setLink('window.location.href=\'' . $CONFIG->getPhpSelfWithBaseUrl() . '?delete=unknown\'');
-$webUi->addCard("Unknown Barcodes", getHtmlMainMenuTableUnknown($barcodes), $link);
+$webUi->addCard(_("Unknown Barcodes"), getHtmlMainMenuTableUnknown($barcodes), $link);
 
 $link = (new MenuItemLink())
-    ->setText("Clear log")
+    ->setText(_("Clear log"))
     ->setLink('window.location.href=\'' . $CONFIG->getPhpSelfWithBaseUrl() . '?delete=log\'');
-$webUi->addCard("Processed Barcodes", getHtmlLogTextArea(), $link);
+$webUi->addCard(_("Processed Barcodes"), getHtmlLogTextArea(), $link);
 $webUi->addScript("updateRedisCacheAndFederation(false)");
 $webUi->addFooter();
 displayFederationPopupHtml($webUi);
@@ -288,11 +288,11 @@ function getHtmlMainMenuReqActions(array $barcodes): string {
         return "null";
     } else {
         $table = new TableGenerator(array(
-            "Name",
-            "Current Weight",
-            "Input",
-            "Action",
-            "Remove"
+            _("Name"),
+            _("Current Weight"),
+            _("Input"),
+            _("Action"),
+            _("Remove")
         ));
         foreach ($barcodes['tare'] as $item) {
             $product     = API::getProductByBarcode($item['barcode']);
@@ -305,14 +305,14 @@ function getHtmlMainMenuReqActions(array $barcodes): string {
                 ->setWidth('8em')
                 ->minmax(array($product->tareWeight, null))
                 ->generate(true));
-            $table->addCell($html->buildButton("button_submit", "Submit")
+            $table->addCell($html->buildButton("button_submit", _("Submit"))
                 ->setSubmit()
                 ->setRaised()
                 ->setIsAccent()
                 ->setValue($item['id'])
                 ->setId('button_submit_' . $item['id'])
                 ->generate(true));
-            $table->addCell($html->buildButton("button_delete", "Remove")->setSubmit()->setValue($item['id'])->generate(true));
+            $table->addCell($html->buildButton("button_delete", _("Remove"))->setSubmit()->setValue($item['id'])->generate(true));
             $table->endRow();
         }
         $html->addTableClass($table);
@@ -331,7 +331,7 @@ function getHtmlMainMenuTableKnown(array $barcodes): string {
 
     $html = new UiEditor(true, null, "f1");
     if (sizeof($barcodes['known']) == 0) {
-        $html->addHtml("No known barcodes yet.");
+        $html->addHtml(_("No known barcodes yet."));
         return $html->getHtml();
     } else {
 
@@ -341,14 +341,15 @@ function getHtmlMainMenuTableKnown(array $barcodes): string {
                 $containsFederationName = true;
         }
         $arrayTableEntries = array(
-            "Name",
-            "Barcode",
-            "Quantity",
-            "Product",
-            "Action",
-            "Tags",
-            "Create",
-            "Remove");
+            _("Name"),
+            _("Barcode"),
+            _("Quantity"),
+            _("Product"),
+            _("Action"),
+            _("Tags"),
+            _("Create"),
+            _("Remove")
+         );
         if ($containsFederationName)
             array_splice($arrayTableEntries, 1, 0, array("Federation"));
 
@@ -373,7 +374,7 @@ function getHtmlMainMenuTableKnown(array $barcodes): string {
             $table->addCell($item['barcode']);
             $table->addCell($item['amount']);
             $table->addCell('<select style="max-width: 20em;" onchange=\'enableButton("select_' . $itemId . '", "button_add_' . $item['id'] . '", "button_consume_' . $item['id'] . '")\' id="select_' . $itemId . '" name="select_' . $itemId . '">' . printSelections($item['match'], $productinfo) . '</select>');
-            $table->addCell($html->buildButton("button_add", "Add")
+            $table->addCell($html->buildButton("button_add", _("Add"))
                     ->setDisabled($isDisabled)
                     ->setSubmit()
                     ->setRaised()
@@ -381,7 +382,7 @@ function getHtmlMainMenuTableKnown(array $barcodes): string {
                     ->setValue($item['id'])
                     ->setId('button_add_' . $item['id'])
                     ->generate(true) . ' ' .
-                $html->buildButton("button_consume", "Consume")
+                $html->buildButton("button_consume", _("Consume"))
                     ->setDisabled($isDisabled)
                     ->setSubmit()
                     ->setRaised()
@@ -390,10 +391,10 @@ function getHtmlMainMenuTableKnown(array $barcodes): string {
                     ->setId('button_consume_' . $item['id'])
                     ->generate(true));
             $table->addCell(explodeWordsAndMakeCheckboxes($item['name'], $itemId));
-            $table->addCell($html->buildButton("button_createproduct", "Create Product")
+            $table->addCell($html->buildButton("button_createproduct", _("Create Product"))
                 ->setOnClick('openNewTab(\'' . BBConfig::getInstance()["GROCY_BASE_URL"] . 'product/new?closeAfterCreation&flow=InplaceNewProductWithName&name=' . rawurlencode(htmlspecialchars_decode($item['name'], ENT_QUOTES)) . '\', \'' . $item['barcode'] . '\')')
                 ->generate(true));
-            $table->addCell($html->buildButton("button_delete", "Remove")->setSubmit()->setValue($item['id'])->generate(true));
+            $table->addCell($html->buildButton("button_delete", _("Remove"))->setSubmit()->setValue($item['id'])->generate(true));
             $table->endRow();
         }
         $html->addTableClass($table);
@@ -421,7 +422,7 @@ function getHtmlMainMenuTableUnknown(array $barcodes): string {
     global $CONFIG;
     $html = new UiEditor(true, null, "f2");
     if (sizeof($barcodes['unknown']) == 0) {
-        $html->addHtml("No unknown barcodes yet.");
+        $html->addHtml(_("No unknown barcodes yet."));
         return $html->getHtml();
     } else {
         $table = new TableGenerator(array(
@@ -452,7 +453,7 @@ function getHtmlMainMenuTableUnknown(array $barcodes): string {
                     ->setValue($item['id'])
                     ->setId('button_add_' . $item['id'])
                     ->generate(true) . ' ' .
-                $html->buildButton("button_consume", "Consume")
+                $html->buildButton("button_consume", _("Consume"))
                     ->setDisabled($isDisabled)
                     ->setSubmit()
                     ->setRaised()
@@ -460,10 +461,10 @@ function getHtmlMainMenuTableUnknown(array $barcodes): string {
                     ->setValue($item['id'])
                     ->setId('button_consume_' . $item['id'])
                     ->generate(true));
-            $table->addCell($html->buildButton("button_createproduct", "Create Product")
+            $table->addCell($html->buildButton("button_createproduct", _("Create Product"))
                 ->setOnClick('openNewTab(\'' . BBConfig::getInstance()["GROCY_BASE_URL"] . 'product/new?closeAfterCreation&prefillbarcode=' . $item['barcode'] . '\', \'' . $item['barcode'] . '\')')
                 ->generate(true));
-            $table->addCell($html->buildButton("button_delete", "Remove")->setSubmit()->setValue($item['id'])->generate(true));
+            $table->addCell($html->buildButton("button_delete", _("Remove"))->setSubmit()->setValue($item['id'])->generate(true));
             $table->endRow();
         }
         $html->addTableClass($table);

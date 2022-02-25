@@ -40,7 +40,7 @@ function outputSocketError(): void {
 }
 
 function sendStillAlive(): void {
-    sendData('{"action":"status","data":"Connected"}');
+    sendData('{"action":"status","data":"Connected !"}');
 }
 
 

@@ -17,6 +17,7 @@
 require_once __DIR__ . "/../incl/configProcessing.inc.php";
 require_once __DIR__ . "/../incl/processing.inc.php";
 require_once __DIR__ . "/../incl/webui.inc.php";
+require_once __DIR__ . "../incl/api.inc.php";
 
 
 $CONFIG->checkIfAuthenticated(true, true);
@@ -43,18 +44,18 @@ $webUi->printHtml();
 function getHtmlAdminMenu():string {
     global $CONFIG;
     $html = new UiEditor();
-    $html->buildButton("button_backup", "Logout")
+    $html->buildButton("button_backup", _("Logout"))
         ->setIsAccent()
         ->setOnClick("location.href='../logout.php'")
         ->setRaised()
         ->generate();
     $pathUsers = realpath($CONFIG->AUTHDB_PATH);
-    $html->buildButton("button_backup", "Download Database")
+    $html->buildButton("button_backup", _("Download Database"))
         ->setOnClick("location.href='./admin.php?download'")
         ->setRaised()
         ->generate();
-    $html->buildButton("button_backup", "Change Password")
-        ->setOnClick("alert('If you would like to change your password, please delete the file $pathUsers')")
+    $html->buildButton("button_backup", _("Change Password"))
+        ->setOnClick("alert('<?php sprintf(_(\"If you would like to change your password, please delete the file\"), $pathUsers ?>)'")
         ->setRaised()
         ->generate();
     return $html->getHtml();

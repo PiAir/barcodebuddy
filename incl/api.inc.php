@@ -48,6 +48,7 @@ class GrocyProduct {
     public $name;
     public $barcodes = null;
     public $unit = null;
+    public $units = null;    
     public $stockAmount = "0";
     public $isTare;
     public $tareWeight;
@@ -67,6 +68,7 @@ class GrocyProduct {
         $result->defaultBestBeforeDays = $infoArray["product"]["default_best_before_days"];
         $result->creationDate          = $infoArray["product"]["row_created_timestamp"];
         $result->unit                  = sanitizeString($infoArray["quantity_unit_stock"]["name"]);
+        $result->units                 = sanitizeString($infoArray["quantity_unit_stock"]["name_plural"]);        
         $result->barcodes              = $infoArray["product_barcodes"];
 
         if (sanitizeString($infoArray["stock_amount"]) != null)

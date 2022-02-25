@@ -26,6 +26,7 @@
 
 require_once __DIR__ . "/internalChecking.inc.php";
 require_once __DIR__ . "/websocket/client_internal.php";
+require_once __DIR__ . "/locale.inc.php";
 
 class SocketConnection {
 

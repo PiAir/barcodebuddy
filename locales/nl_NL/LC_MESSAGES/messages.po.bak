@@ -1,9 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-02-22 06:49+0000\n"
-"Last-Translator: PiAir <pierre@gosoftonline.com>\n"
+"Project-Id-Version: Dutch (Barcode Buddy)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-23 08:13+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/barcode-buddy/"
 "strings/nl/>\n"
 "Language: nl\n"
@@ -12,10 +13,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.11-dev\n"
-"X-Poedit-Basepath: locale\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPath-1: nb_NO\n"
 
+#, c-format
 msgid "Unknown barcode looked up, found name: %s"
 msgstr "Onbekende streepjescode opgezocht, naam gevonden: %s"
 
@@ -25,39 +24,50 @@ msgstr "Onbekend product reeds gescand. Hoeveelheid verhoogd."
 msgid "Unknown barcode could not be looked up"
 msgstr "Onbekende streepjescode kon niet worden opgezocht"
 
-msgid "Product found. None in stock, not consuming: %s"
-msgstr "Product gevonden. Geen op voorraad, niets geconsumeerd: %s"
+msgid "Product found. "
+msgstr "Product gevonden. "
 
-msgid "Product found. Consuming %d %s of %s [%d]. In Stock: %d"
-msgstr "Product gevonden. Verbruikt %d %s van %s [%d]. Op voorraad: %d"
+msgid "Currently in stock: %d %s of %s"
+msgstr "In voorraad: %d %s van %s"
 
-msgid "Product found. Opening %d %s of %s"
-msgstr "Product gevonden. %d %s van %s geopend"
+msgid "Add barcode"
+msgstr "Nieuwe streepjescode"
 
-msgid "Set state to Open"
-msgstr "Zet status op Open"
+msgid "Enter your barcodes below, one each line."
+msgstr "Voeg je streepjescodes hieronder toe, één per regel."
 
-msgid "Set state to Consume"
-msgstr "Zet status op Verbruiken"
+#, c-format
+msgid "None in stock, not consuming: %s"
+msgstr "Niet op voorraad, niets geconsumeerd: %s"
 
-msgid "Set state to Purchase"
-msgstr "Zet status op Kopen"
+msgid "Consuming %d %s of %s"
+msgstr "Verbruikt %d %s van %s"
 
+msgid " In Stock: %d"
+msgstr " Op voorraad: %d"
+
+msgid "Opening %d %s of %s"
+msgstr "Openen van %d %s van %s"
+
+msgid "Set state to "
+msgstr "Zet status op "
+
+#, c-format, ignore-duplicate
 msgid "Adding %d %s of %s"
 msgstr "Toevoegen van %d %s van %s"
 
+#, c-format
 msgid "Associated barcode %d with %s"
 msgstr "Streepjescode %d aan %s gekoppeld"
 
+#, c-format, ignore-duplicate
 msgid "Product found. Adding %d %s of %s"
 msgstr "Product gevonden. Toevoegen van %d %s van %s"
-
-msgid "None in stock, not consuming: %s"
-msgstr "Niet op voorraad, niets geconsumeerd: %s"
 
 msgid "Reverting back to Consume"
 msgstr "Terugkeren naar Verbruiken"
 
+#, c-format
 msgid "Product found. Consuming %d %s of %s"
 msgstr "Product gevonden. Verbruikt %d %s van %s"
 
@@ -85,11 +95,20 @@ msgstr "Verwerkte streepjescodes"
 msgid "Barcode"
 msgstr "Streepjescode"
 
+msgid "waiting for barcode..."
+msgstr "Wacht op streepjescode..."
+
+msgid "previous scans:"
+msgstr "Eerdere scans:"
+
 msgid "Look up"
 msgstr "Opzoeken"
 
 msgid "Quantity"
 msgstr "Hoeveelheid"
+
+msgid "Set quantity"
+msgstr "Hoeveelheid invoeren"
 
 msgid "Product"
 msgstr "Product"
@@ -107,10 +126,67 @@ msgid "Clear log"
 msgstr "Logboek wissen"
 
 msgid "Create Product"
-msgstr "Creëer product"
+msgstr "Nieuw product"
 
 msgid "Add"
 msgstr "Toevoegen"
 
+msgid "Name"
+msgstr "Naam"
+
 msgid "Consume"
-msgstr "Consumeer"
+msgstr "Verbruik"
+
+msgid "Consume (spoiled)"
+msgstr "Verbruik (verspild)"
+
+msgid "Consume (all)"
+msgstr "Verbruik (alles)"
+
+msgid "Purchase"
+msgstr "Koop"
+
+msgid "Open"
+msgstr "Open"
+
+msgid "Inventory"
+msgstr "Voorraad"
+
+msgid "Shopping List"
+msgstr "Boodschappenlijst"
+
+msgid "Add to Shopping List"
+msgstr "Toevoegen aan boodschappenlijst"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "Overview"
+msgstr "Overzicht"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "Quantities"
+msgstr "Hoeveelheden"
+
+msgid "Chores"
+msgstr "Taken"
+
+msgid "Tags"
+msgstr "Tags"
+
+msgid "API"
+msgstr "API"
+
+msgid "Federation"
+msgstr "Federatie"
+
+msgid "Admin"
+msgstr "Beheer"
+
+msgid "Connecting..."
+msgstr "Verbinden..."
+
+msgid "Connected"
+msgstr "Verbonden"

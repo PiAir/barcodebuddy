@@ -78,6 +78,11 @@ const SEARCH_ENGINE               = "https://google.com/search?q=";
 const BASEURL                      = "/";
 
 
+// If you want to overrule the default LOCALE set on the server
+// make sure it is equal to an .po file in locales
+const LOCALE                      = "nl";
+
+
 //If you need to manually override a config value, you can do so with this array.
 //Any overridden value cannot be changed through the UI anymore!
 const OVERRIDDEN_USER_CONFIG       = array(

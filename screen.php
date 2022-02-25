@@ -239,17 +239,17 @@ $CONFIG->checkIfAuthenticated(true);
 <div class="main-container">
     <div id="header" class="header">
     <span class="hdr-right h4">
-      Status: <span id="grocy-sse">Connecting...</span><br>
+      <?php echo _("Status: ")?><span id="grocy-sse"><?php echo _("Connecting...")?></span><br>
     </span>
         <span id="mode" class="h1 hdr-left"></span>
     </div>
     <div id="content" class="content">
-        <p id="scan-result" class="h2">If you see this for more than a couple of seconds, please check if the websocket
-            server has been started and is available</p>
+        <p id="scan-result" class="h2"><?php echo _("If you see this for more than a couple of seconds, please check if the websocket
+            server has been started and is available")?></p>
         <div id="log">
             <p id="event" class="h3"></p><br>
             <div id="previous-events">
-                <p class="h4 p-t10"> previous scans: </p>
+                <p class="h4 p-t10"> <?php echo  _("previous scans:"); ?> </p>
                 <span id="log-entries" class="h5"></span>
             </div>
         </div>
@@ -280,14 +280,14 @@ $CONFIG->checkIfAuthenticated(true);
 <div id="myNav" class="overlay">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <div class="overlay-content">
-        <a href="#" onclick="sendBarcode('<?php echo BBConfig::getInstance()["BARCODE_P"] ?>')">Purchase</a>
-        <a href="#" onclick="sendBarcode('<?php echo BBConfig::getInstance()["BARCODE_C"] ?>')">Consume</a>
-        <a href="#" onclick="sendBarcode('<?php echo BBConfig::getInstance()["BARCODE_O"] ?>')">Open</a>
-        <a href="#" onclick="sendBarcode('<?php echo BBConfig::getInstance()["BARCODE_GS"] ?>')">Inventory</a>
-        <a href="#" onclick="sendBarcode('<?php echo BBConfig::getInstance()["BARCODE_AS"] ?>')">Add to shoppinglist</a>
-        <a href="#" onclick="sendQuantity()">Set quantity</a>
-        <a href="#" onclick="sendBarcode('<?php echo BBConfig::getInstance()["BARCODE_CA"] ?>')">Consume All</a>
-        <a href="#" onclick="sendBarcode('<?php echo BBConfig::getInstance()["BARCODE_CS"] ?>')">Consume (spoiled)</a>
+        <a href="#" onclick="sendBarcode('<?php echo BBConfig::getInstance()["BARCODE_P"] ?>')"><?php echo _("Purchase")?></a>
+        <a href="#" onclick="sendBarcode('<?php echo BBConfig::getInstance()["BARCODE_C"] ?>')"><?php echo _("Consume")?></a>
+        <a href="#" onclick="sendBarcode('<?php echo BBConfig::getInstance()["BARCODE_O"] ?>')"><?php echo _("Open")?></a>
+        <a href="#" onclick="sendBarcode('<?php echo BBConfig::getInstance()["BARCODE_GS"] ?>')"><?php echo _("Inventory")?></a>
+        <a href="#" onclick="sendBarcode('<?php echo BBConfig::getInstance()["BARCODE_AS"] ?>')"><?php echo _("Add to shoppinglist")?></a>
+        <a href="#" onclick="sendQuantity()"><?php echo _("Set quantity")?></a>
+        <a href="#" onclick="sendBarcode('<?php echo BBConfig::getInstance()["BARCODE_CA"] ?>')"><?php echo _("Consume (all)")?></a>
+        <a href="#" onclick="sendBarcode('<?php echo BBConfig::getInstance()["BARCODE_CS"] ?>')"><?php echo _("Consume (spoiled)")?></a>
     </div>
 </div>
 
@@ -387,7 +387,7 @@ $CONFIG->checkIfAuthenticated(true);
             await sleep(3000);
             if (currentScanId == scanId) {
                 document.getElementById('content').style.backgroundColor = '#eee';
-                document.getElementById('scan-result').textContent = 'waiting for barcode...';
+                document.getElementById('scan-result').textContent = '<?php echo _("waiting for barcode...")?>';
                 document.getElementById('event').textContent = '';
             }
         }
@@ -407,20 +407,20 @@ $CONFIG->checkIfAuthenticated(true);
         }
 
         source.onopen = function () {
-            document.getElementById('grocy-sse').textContent = 'Connected';
+            document.getElementById('grocy-sse').textContent = '<?php echo _("Connected")?>';
             if (isFirstStart) {
                 isFirstStart = false;
-                document.getElementById('scan-result').textContent = 'waiting for barcode...';
+                document.getElementById('scan-result').textContent = '<?php echo _("waiting for barcode...")?>';
                 var http = new XMLHttpRequest();
                 http.open("GET", "incl/sse/sse_data.php?getState");
                 http.send();
             }
         };
 
-        source.onmessage = function (event) {
-            var resultJson = JSON.parse(event.data);
+        source.onmessage = function (event) {	
+			var resultJson = JSON.parse(event.data);
             var resultCode = resultJson.data.substring(0, 1);
-            var resultText = resultJson.data.substring(1);
+            var resultText = resultJson.data.substring(1);	
             switch (resultCode) {
                 case '0':
                     resultScan("#33a532", "", he.decode(resultText), "beep_success");

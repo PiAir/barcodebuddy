@@ -18,14 +18,16 @@
  */
 
 $available_languages = [];
-foreach(array_diff(scandir(__DIR__ . "/../locale", 1), ['..', '.']) as $lang) {
-    $available_languages[substr(strtolower($lang), 0, 2)] = $lang;
+foreach(array_diff(scandir(__DIR__ . "/../locales", 1), ['..', '.']) as $lang) {
+    $available_languages[substr(strtolower($lang), 0, 2)] = substr(strtolower($lang), 0, 2).'_'.substr(strtoupper($lang), 0, 2);
 }
 
-$lang = strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? 'en-US', 0, 2));
+$lang = strtolower(substr($CONFIG->LOCALE ?? 'en-US', 0, 2));
 $locale = $available_languages[$lang] ?? 'en';
+// DEBUG
+$locale = "nl_NL.UTF-8";
 
-putenv("LC_ALL=$locale");
-setlocale(LC_ALL, $locale);
-bindtextdomain("messages", __DIR__ . "/../locale");
+putenv("LC_MESSAGES=$locale");
+setlocale(LC_MESSAGES, $locale);
+bindtextdomain("messages", __DIR__ . "/../locales");
 textdomain("messages");

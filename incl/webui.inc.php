@@ -28,6 +28,7 @@
 require_once __DIR__ . "/configProcessing.inc.php";
 require_once __DIR__ . "/uiEditor.inc.php";
 require_once __DIR__ . "/config.inc.php";
+require_once __DIR__ . "/locale.inc.php";
 
 const MENU_GENERIC  = 0;
 const MENU_MAIN     = 1;
@@ -214,7 +215,7 @@ class WebUiGenerator {
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <!-- Title -->
-          <span class="mdl-layout-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color: white; text-decoration: none;" href="' . $folder . $indexfile . '">Barcode Buddy</a></span>
+          <span class="mdl-layout-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color: white; text-decoration: none;" href="' . $folder . $indexfile . '">Barcode Buddy</a> ('.setlocale(LC_MESSAGES, 0).')</span>
           <!-- Add spacer, to align navigation to the right -->
           <div class="mdl-layout-spacer"></div>');
         if ($this->menu != MENU_SETUP && $this->menu != MENU_ERROR && $this->menu != MENU_LOGIN) {
@@ -230,18 +231,18 @@ class WebUiGenerator {
       </header>');
         if ($this->menu != MENU_SETUP && $this->menu != MENU_ERROR && $this->menu != MENU_LOGIN) {
             $this->addHtml('<div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Menu</span>
+        <span class="mdl-layout-title">'._("Menu").'</span>
         <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="' . $folder . 'index.php">Overview</a>
-          <a class="mdl-navigation__link" href="' . $folder . 'menu/settings.php">Settings</a>
-          <a class="mdl-navigation__link" href="' . $folder . 'menu/quantities.php">Quantities</a>
-          <a class="mdl-navigation__link" href="' . $folder . 'menu/chores.php">Chores</a>
-          <a class="mdl-navigation__link" href="' . $folder . 'menu/tags.php">Tags</a>
-          <a class="mdl-navigation__link" href="' . $folder . 'menu/apimanagement.php">API</a>
-          <a class="mdl-navigation__link" href="' . $folder . 'menu/federation.php">Federation</a>');
+          <a class="mdl-navigation__link" href="' . $folder . 'index.php">'._("Overview").'</a>
+          <a class="mdl-navigation__link" href="' . $folder . 'menu/settings.php">'._("Settings").'</a>
+          <a class="mdl-navigation__link" href="' . $folder . 'menu/quantities.php">'._("Quantities").'</a>
+          <a class="mdl-navigation__link" href="' . $folder . 'menu/chores.php">'._("Chores").'</a>
+          <a class="mdl-navigation__link" href="' . $folder . 'menu/tags.php">'._("Tags").'</a>
+          <a class="mdl-navigation__link" href="' . $folder . 'menu/apimanagement.php">'._("API").'</a>
+          <a class="mdl-navigation__link" href="' . $folder . 'menu/federation.php">'._("Federation").'</a>');
             if (!$CONFIG->DISABLE_AUTHENTICATION) {
                 $this->addHtml('
-             <a class="mdl-navigation__link" href="' . $folder . 'menu/admin.php">Admin</a>');
+             <a class="mdl-navigation__link" href="' . $folder . 'menu/admin.php">'._("Admin").'</a>');
             }
             $this->addHtml('</nav>
       </div>');
@@ -288,25 +289,25 @@ class WebUiGenerator {
           <div class="modalmain-content">
             <span class="close">&times;</span>
             <div>
-            <h2>Add barcode</h2>
+            <h2>'._("Add barcode").'</h2>
 
-        Enter your barcodes below, one each line.&nbsp;<br><br>
+        '._("Enter your barcodes below, one each line.").'&nbsp;<br><br>
         <form name="form" onsubmit="disableSSE()" method="post" action="' . $CONFIG->getPhpSelfWithBaseUrl() . '" >
         <textarea name="newbarcodes" id="newbarcodes" class="mdl-textfield__input" rows="15"></textarea>
 
         <br>
 
-        <button  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" name="button_add_manual"  id="button_add_manual" type="submit" value="Add">Add</button>​
+        <button  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" name="button_add_manual"  id="button_add_manual" type="submit" value="Add">'._("Add").'</button>​
 
         <br><br>
 
-        <span style="font-size: 9px;">It is recommended to use a script that grabs the barcode scanner input, instead of doing it manually. See the <a href="https://barcodebuddy-documentation.readthedocs.io/en/latest/usage.html#adding-barcodes-automatically" rel="noopener noreferrer" target="_blank">documentation</a> on how to do this.</span><br>
+        <span style="font-size: 9px;">'._("It is recommended to use a script that grabs the barcode scanner input, instead of doing it manually. See the <a href=\"https://barcodebuddy-documentation.readthedocs.io/en/latest/usage.html#adding-barcodes-automatically\" rel=\"noopener noreferrer\" target=\"_blank\">documentation</a> on how to do this.").'</span><br>
 
         </form>
           </div>
           </div>
         </div>
-         <button id="add-barcode" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Add barcode</button> ');
+         <button id="add-barcode" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">'._("Add barcode").'</button> ');
         }
         if ($this->menu == MENU_SETTINGS) {
             $this->addHtml('<button id="save-settings" onclick="checkAndReturn()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Save</button>');
